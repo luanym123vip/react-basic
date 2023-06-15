@@ -1,9 +1,15 @@
 import React from "react";
+import ChildComponents from "./ChildComponents";
 class MyComponent extends React.Component {
 
     state = {
         firstName: '',
         lastName: '',
+        job: [
+            { id: 'abc1', title: 'Dev', salary: '500 $' },
+            { id: 'abc2', title: 'Test', salary: '560 $' },
+            { id: 'abc3', title: 'Sev', salary: '550 $' },
+        ],
     }
     // thế state là gì ?
     // ví dụ như máy tính thì state như là 1 memory nó lưu giữ các biến
@@ -22,10 +28,12 @@ class MyComponent extends React.Component {
     handleSubmit = (event) => {
         event.preventDefault() // hàm này giúp không load lại trang khi submit
         console.log('>>> data:', this.state)
+
     }
     render() {
         // console.log(this.state);
         return (
+            // <> là <React.Fragment>
             <>
                 <form>
                     <label htmlFor="fname" >First name:</label> <br />
@@ -34,6 +42,9 @@ class MyComponent extends React.Component {
                     <input type="text" value={this.state.lastName} onChange={(event) => this.handleChangeLastName(event)} ></input> <br />
                     <input type="submit" value="Submit" onClick={(event) => this.handleSubmit(event)}></input>
                 </form>
+                <div> Child Component</div>
+                <ChildComponents fname={this.state.firstName} lname={this.state.lastName} jobArr={this.state.job} />
+
             </>
 
         )
