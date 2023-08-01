@@ -23,13 +23,28 @@ class ChildComponents extends React.Component {
     //     event.preventDefault() // hàm này giúp không load lại trang khi submit
     //     console.log('>>> data:', this.state)
     // }
+
+    // định nghĩa state cho nút Show và Hide
+    state = {
+        showJobs: false
+    }
+    handleShowHide = () => {
+        this.setState({
+            showJobs: !this.state.showJobs
+        })
+    }
+    handleOnClickDelete = (job) => {
+        this.props.deleteJob(job);
+    }
     render() {
         // let name = this.props.name;
         // let age = this.props.age;
 
         // cách viết tắt và bắt buộc tên biến phải giống tên biến cha truyền xuống
-        let { fname, lname, jobArr } = this.props;
-        console.log('check props: ', this.props)
+        let { jobArr } = this.props;
+        let { showJobs } = this.state;
+        let check = showJobs === true ? 'showJobs = true' : 'showJobs = false'
+        console.log('check : ', check)
         return (
             <>
 
@@ -40,18 +55,36 @@ class ChildComponents extends React.Component {
                     <input type="text" value={this.state.lastName} onChange={(event) => this.handleChangeLastName(event)} ></input> <br />
                     <input type="submit" value="Submit" onClick={(event) => this.handleSubmit(event)}></input>
                 </form> */}
-                <div className="job-lists">
-                    {/* cách gọi array */}
-                    {
-                        jobArr.map((item, index) => {
-                            return (
-                                <div key={item.id}>
-                                    {index} - {item.title} - {item.salary}
-                                </div>
-                            )
-                        })
-                    }
-                </div>
+                {showJobs === false ? <div><button onClick={() => this.handleShowHide()}>Show</button> </div>
+                    :
+                    showJobs &&
+                    // câu trên có nghĩa là nếu showJobs = true thì chạy code sau dấu &&
+                    //bắt buộc phải có <></> để tạo lớp giáp mô hình
+                    <>
+                        <div className="job-lists">
+                            {/* cách gọi array */}
+                            {
+                                jobArr.map((item, index) => {
+                                    if (+item.salary > 500) {
+                                        return (
+
+                                            <div key={item.id}>
+                                                {index} - {item.title} - {item.salary}
+                                                <></> <></> <span onClick={() => this.handleOnClickDelete(item)}>X</span>
+                                            </div>
+
+
+
+                                        )
+                                    }
+
+                                })
+
+                            }
+                        </div>
+                        <div><button onClick={() => this.handleShowHide()}>Hide</button></div>
+                    </>
+                }
             </>
 
         )
