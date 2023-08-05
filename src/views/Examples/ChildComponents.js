@@ -1,4 +1,5 @@
 import React from "react";
+import "./Demo.scss";
 class ChildComponents extends React.Component {
 
     // state = {
@@ -55,7 +56,7 @@ class ChildComponents extends React.Component {
                     <input type="text" value={this.state.lastName} onChange={(event) => this.handleChangeLastName(event)} ></input> <br />
                     <input type="submit" value="Submit" onClick={(event) => this.handleSubmit(event)}></input>
                 </form> */}
-                {showJobs === false ? <div><button onClick={() => this.handleShowHide()}>Show</button> </div>
+                {showJobs === false ? <div><button style={{ color: 'red' }} onClick={() => this.handleShowHide()}>Show</button> </div>
                     :
                     showJobs &&
                     // câu trên có nghĩa là nếu showJobs = true thì chạy code sau dấu &&
