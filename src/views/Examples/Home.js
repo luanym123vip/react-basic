@@ -1,13 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-
+import Color from "../HOC/Color";
 class Home extends React.Component {
 
-    componentDidMount() {
-        setTimeout(() => {
-            this.props.history('/todo');
-        }, 3000);
-    }
+    // componentDidMount() {
+    //     setTimeout(() => {
+    //         this.props.history('/todo');
+    //     }, 3000);
+    // }
 
 
     render() {
@@ -21,6 +21,4 @@ class Home extends React.Component {
         )
     }
 }
-export default Home(props) => (
-    <Home history={useNavigate()} />
-);
+export default Color(Home);
