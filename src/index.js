@@ -3,10 +3,23 @@ import ReactDOM from 'react-dom/client';
 import App from './views/App';
 import reportWebVitals from './reportWebVitals';
 import "./styles/global.scss";
+
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import rootReducer from './store/reducers/rootReducer'
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
+const reduxStore = createStore(rootReducer,
+  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__()
+);
+
 root.render(
   <React.StrictMode>
-    <App />
+    {/* Provider ép được React khởi động chung vs Redux, vì React và Redux chạy song song chứ Redux không phải được chứa trong React  */}
+    {/* Provider ép được React khởi động chung vs Redux  */}
+    <Provider store={reduxStore}>
+      <App />
+    </Provider>
   </React.StrictMode>
 );
 
